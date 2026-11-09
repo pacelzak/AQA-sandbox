@@ -1,0 +1,23 @@
+# Virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Pytest
+.pytest_cache/
+
+# Allure
+allure-results/
+allure-report/
+
+# IDE
+.idea/
+.vscode/
+
+# Environment variables
+.env
+.idea
+
