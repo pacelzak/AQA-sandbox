@@ -24,5 +24,5 @@ class Settings:
     NEW_PASSWORD = os.getenv("EVE_PASSWORD")
     BANNED_EMAIL = os.getenv("FRANK_EMAIL")
     BANNED_PASSWORD = os.getenv("FRANK_PASSWORD")
-    Connection_BD = os.getenv("CONNECTION_BD")
+    CONNECTION_BD = os.getenv("CONNECTION_BD")
     RESET_URL = os.getenv("RESET_URL")

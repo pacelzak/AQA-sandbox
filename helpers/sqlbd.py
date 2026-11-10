@@ -5,7 +5,7 @@ from helpers.settings import Settings
 class SQLBD:
 
     def __init__(self):
-        self.engine = create_engine(Settings.Connection_BD)
+        self.engine = create_engine(Settings.CONNECTION_BD)
 
     def info_user(self, uuid):
         """Получает пользователя из БД по UUID."""
