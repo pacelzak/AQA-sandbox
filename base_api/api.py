@@ -1,15 +1,16 @@
 import httpx
+from helpers.settings import Settings
 
 
 class BaseAPI:
 
     def __init__(self, client=None):
 
-        self.client = client or httpx.Client()
+        self.client = client or httpx.Client(base_url=Settings.BASE_URL)
 
     def requests(self, method, path, **kwargs):
 
-        return self.client.request(method, path, **kwargs)
+        return self.client.request(method, path, **kwargs,)
 
     def set_token(self, token):
 
