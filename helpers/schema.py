@@ -25,3 +25,12 @@ class RegisterSchema(BaseModel):
     posts_count: int
     is_following: bool
     is_followed_by: bool
+
+class RegisterDublicateSchema(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    detail: str
+    error_code: str
+    status_code: int
+
+
