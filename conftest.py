@@ -45,6 +45,12 @@ def reset_database():
     yield
     return httpx.post(Settings.RESET_URL)
 
+@pytest.fixture()
+def create_user(create_data):
+    api = Auth()
+    response = api.register(create_data['email'],  create_data['username'], create_data['password'], create_data['display_name'])
+    assert response.status_code == 201, response.text
+    return create_data
 
 
 

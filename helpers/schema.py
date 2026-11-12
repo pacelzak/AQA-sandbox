@@ -1,7 +1,8 @@
-from pydantic import BaseModel, ConfigDict , Field, EmailStr
 from typing import Literal
-from datetime import datetime
+from pydantic import BaseModel, Field, ConfigDict, EmailStr
+from typing import List, Union
 from uuid import UUID
+from datetime import datetime
 
 class RegisterSchema(BaseModel):
 
@@ -33,4 +34,29 @@ class RegisterDublicateSchema(BaseModel):
     error_code: str
     status_code: int
 
+class LoginSchema(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    access_token: str = Field(
+        pattern=r"^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$"
+    )
+    refresh_token: str
+    token_type: Literal["bearer"]
+
+class FailedLoginSchema(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    detail: str
+    error_code: str
+    status_code: int
+
+class ValidationErrorItem(BaseModel):
+
+    loc: List[Union[str, int]]
+    msg: str
+    type: str
+
+
+
+class HTTPValidationError(BaseModel):
+    detail: List[ValidationErrorItem]
 
