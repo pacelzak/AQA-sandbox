@@ -1,11 +1,8 @@
-import pytest
-import time
 
+import time
 from base_api.api_auth import Auth
 from helpers.assertions import *
 from helpers.schema import *
-from helpers.sqlbd import SQLBD
-from helpers.settings import Settings
 import allure
 
 def test_positive_refresh_token(create_user):
