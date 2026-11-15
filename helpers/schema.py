@@ -54,9 +54,6 @@ class ValidationErrorItem(BaseModel):
     loc: List[Union[str, int]]
     msg: str
     type: str
-
-
-
 class HTTPValidationError(BaseModel):
     detail: List[ValidationErrorItem]
 
