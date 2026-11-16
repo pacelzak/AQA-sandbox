@@ -54,3 +54,14 @@ def test_positive_list_users_unique_pages(auth_client):
     first_ids = {item["id"] for item in first_page.json()["items"]}
     second_ids = {item["id"] for item in second_page.json()["items"]}
     assert first_ids.isdisjoint(second_ids)
+
+def test_not_auth(auth_client):
+    """Проверка запроса без токена."""
+
+    user = Users()
+    first_page = user.list_users()
+    with allure.step("Статус код"):
+        assertions_status_code(first_page, 403)
+    with allure.step("Валидация ответа"):
+        SchemanotAuth.model_validate(first_page.json())
+

@@ -57,18 +57,6 @@ class ValidationErrorItem(BaseModel):
 class HTTPValidationError(BaseModel):
     detail: List[ValidationErrorItem]
 
-{
-  "items": [
-    {
-
-    }
-  ],
-  "total": 0,
-  "page": 0,
-  "per_page": 0,
-  "pages": 0
-}
-
 class ListUsersSchema(BaseModel):
     model_config = ConfigDict(extra="forbid")
     id: UUID
@@ -87,3 +75,13 @@ class PaginationSchema(BaseModel):
 class UserSchema(PaginationSchema):
     model_config = ConfigDict(extra="forbid")
     items: List[ListUsersSchema]
+
+class SchemanotAuth(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    detail : str = Field(default="Not authenticated")
+
+class SchemaUserNotFound(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    detail: str
+    error_code: str
+    status_code: int
