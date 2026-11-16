@@ -16,5 +16,21 @@ class SQLBD:
             result = connection.execute(query, params)
             return result.fetchone()
 
+    def table_user(self, table_name, **filters):
+        """Получает пользователя из БД по UUID."""
+        query = f"select * from {table_name}"
+        params = {}
+        conditions = []
+        for col, val in filters.items():
+            conditions.append(f"{col} = :{col}")
+            params[col] = val
+        if conditions:
+            query += " where " + " and ".join(conditions)
+        with self.engine.connect() as conn:
+            res = conn.execute(text(query), params)
+            rows = res.fetchall()
+        return len(rows)
+
+
 
 

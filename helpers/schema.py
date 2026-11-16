@@ -57,3 +57,33 @@ class ValidationErrorItem(BaseModel):
 class HTTPValidationError(BaseModel):
     detail: List[ValidationErrorItem]
 
+{
+  "items": [
+    {
+
+    }
+  ],
+  "total": 0,
+  "page": 0,
+  "per_page": 0,
+  "pages": 0
+}
+
+class ListUsersSchema(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    id: UUID
+    username: str
+    display_name: str
+    avatar_url: str|None
+    is_verified: bool
+
+class PaginationSchema(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    total: int
+    page: int
+    per_page: int
+    pages: int
+
+class UserSchema(PaginationSchema):
+    model_config = ConfigDict(extra="forbid")
+    items: List[ListUsersSchema]

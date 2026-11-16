@@ -24,7 +24,7 @@ class Users(BaseAPI):
             "page": page,
             "per_page": per_page
         }
-
+        params = {key:value for key, value in params.items() if value is not None}
         return self.get("/api/users", params=params)
 
     def get_suggestions(self):
