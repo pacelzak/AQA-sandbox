@@ -1,5 +1,5 @@
 from typing import Literal
-from pydantic import BaseModel, Field, ConfigDict, EmailStr
+from pydantic import BaseModel, Field, ConfigDict, EmailStr, RootModel
 from typing import List, Union
 from uuid import UUID
 from datetime import datetime
@@ -85,3 +85,14 @@ class SchemaUserNotFound(BaseModel):
     detail: str
     error_code: str
     status_code: int
+
+class SchemaSuggestion(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    id: UUID
+    username: str
+    display_name: str
+    avatar_url: str|None
+    is_verified: bool
+
+class Suggestions(RootModel[list[SchemaSuggestion]]):
+    pass
