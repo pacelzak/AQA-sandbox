@@ -97,6 +97,7 @@ class Users(BaseAPI):
             httpx.Response: Ответ API со списком постов пользователя.
         """
         params = {"page": page, "per_page": per_page}
+        params = {key: value for key, value in params.items() if value is not None}
         return self.get(f"/api/users/{username}/posts", params=params)
 
     def get_followers(self, username=None, page=None, per_page=None):
@@ -112,6 +113,7 @@ class Users(BaseAPI):
             httpx.Response: Ответ API со списком подписчиков.
         """
         params = {"page": page, "per_page": per_page}
+        params = {key: value for key, value in params.items() if value is not None}
         return self.get(f"/api/users/{username}/followers", params=params)
 
     def get_following(self, username=None, page=None, per_page=None):
@@ -127,4 +129,5 @@ class Users(BaseAPI):
             httpx.Response: Ответ API со списком подписок.
         """
         params = {"page": page, "per_page": per_page}
+        params = {key: value for key, value in params.items() if value is not None}
         return self.get(f"/api/users/{username}/following", params=params)

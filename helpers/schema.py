@@ -1,6 +1,6 @@
 from typing import Literal
 from pydantic import BaseModel, Field, ConfigDict, EmailStr, RootModel
-from typing import List, Union
+from typing import List, Union, Dict
 from uuid import UUID
 from datetime import datetime
 
@@ -96,3 +96,46 @@ class SchemaSuggestion(BaseModel):
 
 class Suggestions(RootModel[list[SchemaSuggestion]]):
     pass
+
+class HashtagSchema(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    id: UUID
+    name: str
+    posts_count: int
+
+class RootsPostSchema(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    id: UUID
+    username: str
+    display_name: str
+    avatar_url: str|None
+    is_verified: bool
+
+class Roots2PostSchema(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    id: UUID
+    author: RootsPostSchema
+    content: str
+    image_url: str | None
+    is_pinned: bool
+    is_deleted: bool
+    parent_id: UUID | None
+    repost_type: str | None
+    visibility: str
+    likes_count: int
+    comments_count: int
+    reposts_count: int
+    hashtags: List[HashtagSchema]
+    created_at: str
+    updated_at: str
+    is_liked: bool
+    is_bookmarked: bool
+    user_reaction: str | None
+
+
+class GetUserPostSchema(PaginationSchema):
+    model_config = ConfigDict(extra="forbid")
+
+    items: List[Roots2PostSchema]

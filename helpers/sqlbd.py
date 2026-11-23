@@ -31,6 +31,16 @@ class SQLBD:
             rows = res.fetchall()
         return len(rows)
 
+    def count_posts(self, id):
+        """Получение списка постов"""
+        query = text("SELECT COUNT(*) FROM posts WHERE author_id = :id")
+        params = {"id": id}
+        with self.engine.connect() as conn:
+            res = conn.execute(query, params)
+            rows = res.scalar_one()
+        return rows
+
+
 
 
 
