@@ -1,5 +1,6 @@
 from base_api.api import BaseAPI
-
+from pathlib import Path
+import mimetypes
 
 class Users(BaseAPI):
 
@@ -71,9 +72,11 @@ class Users(BaseAPI):
         Returns:
             httpx.Response: Ответ API с обновлённой информацией профиля.
         """
-        with open(f"{file}", 'rb') as img:
-            files = {'file': ('my_photo.jpg', img, 'image/jpeg')}
-            return self.post('/api/users/me/avatar', files=files)
+        mime_type, _ = mimetypes.guess_type(file.name)
+
+        with open(file, "rb") as img:
+            files = {"file": (file.name,img,mime_type or "application/octet-stream")}
+            return self.post("/api/users/me/avatar", files=files)
 
     def delete_avatar(self):
         """
