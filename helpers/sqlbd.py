@@ -40,6 +40,15 @@ class SQLBD:
             rows = res.scalar_one()
         return rows
 
+    def count_followers(self, type_following, id):
+        query = text(f"SELECT COUNT(*) FROM follows WHERE {type_following} = :id")
+        params = {"id": id}
+        with self.engine.connect() as conn:
+            res = conn.execute(query, params)
+            rows = res.scalar_one()
+        return rows
+
+
 
 
 

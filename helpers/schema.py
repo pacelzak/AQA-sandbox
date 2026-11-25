@@ -139,3 +139,17 @@ class GetUserPostSchema(PaginationSchema):
     model_config = ConfigDict(extra="forbid")
 
     items: List[Roots2PostSchema]
+
+class FollowSchema(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    id: UUID
+    username: str
+    display_name: str
+    avatar_url: str|None
+    is_verified: bool
+
+class RootsFollowersSchema(PaginationSchema):
+    model_config = ConfigDict(extra="forbid")
+    items: List[FollowSchema]
+
+
